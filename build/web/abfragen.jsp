@@ -4,6 +4,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+    System.out.println("test");
+    //String rqD = request.getParameter("deutsch") ;
+    if (request.getParameter("deutsch") != null) {
+        //String query = "SELECT * FROM APP.VOKABEL WHERE deutsch = " + request.getParameter("deutsch");
+        System.out.println("test");
+%>
+<c:if test="${rqD != null}">
+    <sql:query var="lastWord" dataSource="jdbc/vokabeltrainer">
+        SELECT * FROM APP.VOKABEL WHERE deutsch = request.getParameter('deutsch')
+    </sql:query>
+    <%
+        System.out.println("test");
+    %>
+</c:if>
 <sql:query var="resultat" dataSource="jdbc/vokabeltrainer">
     SELECT * FROM APP.VOKABEL ORDER BY RANDOM() FETCH FIRST 1 ROWS ONLY
 </sql:query>
@@ -18,6 +33,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     </head>
     <body>
+
+        
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="/">Vokabeltrainer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +57,7 @@
                     <%= java.lang.Math.round(java.lang.Math.random()) %>
                 </c:set>
                 <h1>Abfrage</h1>
-                <form>
+                <form action="abfragen.jsp" method="post">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -48,9 +65,12 @@
                                 <input 
                                     <c:if test="${zufallsZahl == 1}">
                                         value="${resultat.getRows()[0].deutsch}"
-                                        disabled
+                                        readonly
                                     </c:if>
-                                    type="text" class="form-control" placeholder="Deutsch">
+                                    <c:if test="${zufallsZahl == 0}">
+                                        autofocus
+                                    </c:if>    
+                                    type="text" name="deutsch" class="form-control" placeholder="Deutsch">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -59,9 +79,12 @@
                                 <input 
                                     <c:if test="${zufallsZahl == 0}">
                                         value="${resultat.getRows()[0].fremdsprache}" 
-                                        disabled
+                                        readonly
                                     </c:if>
-                                    type="text" class="form-control" placeholder="Fremdsprache">
+                                    <c:if test="${zufallsZahl == 1}">
+                                        autofocus
+                                    </c:if>    
+                                    type="text" name="fremdsprahce" class="form-control" placeholder="Fremdsprache">
                             </div>
                         </div>
                     </div>
