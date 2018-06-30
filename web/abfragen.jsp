@@ -5,20 +5,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-    System.out.println("test");
+    out.println("test");
     //String rqD = request.getParameter("deutsch") ;
-    if (request.getParameter("deutsch") != null) {
+    if (request.getParameter("id") != null) {
         //String query = "SELECT * FROM APP.VOKABEL WHERE deutsch = " + request.getParameter("deutsch");
-        System.out.println("test");
+        out.println(request.getParameter("id") );
+    }
 %>
-<c:if test="${rqD != null}">
-    <sql:query var="lastWord" dataSource="jdbc/vokabeltrainer">
-        SELECT * FROM APP.VOKABEL WHERE deutsch = request.getParameter('deutsch')
-    </sql:query>
-    <%
-        System.out.println("test");
-    %>
-</c:if>
+
 <sql:query var="resultat" dataSource="jdbc/vokabeltrainer">
     SELECT * FROM APP.VOKABEL ORDER BY RANDOM() FETCH FIRST 1 ROWS ONLY
 </sql:query>
@@ -71,6 +65,7 @@
                                         autofocus
                                     </c:if>    
                                     type="text" name="deutsch" class="form-control" placeholder="Deutsch">
+                                <input type="hidden" name="id" value ="${resultat.getRows()[0].id}">
                             </div>
                         </div>
                         <div class="col-sm-6">
