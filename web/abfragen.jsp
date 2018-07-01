@@ -5,16 +5,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
-    out.println("test");
-    //String rqD = request.getParameter("deutsch") ;
-    if (request.getParameter("id") != null) {
-        //String query = "SELECT * FROM APP.VOKABEL WHERE deutsch = " + request.getParameter("deutsch");
-        out.println(request.getParameter("id") );
+    // Etwas wurde übermittelt
+    if (request.getParameter("id") != null) {        
+        String sql = "";
+        if (request.getParameter("de").equals(request.getParameter("deutsch"))
+            && (request.getParameter("fr").equals(request.getParameter("fremdsprache")))) {
+            // Zähler hochzählen weil richtig
+            sql = "UPDATE APP.VOKABEL SET COUNTER = COUNTER + 1 WHERE id = " + request.getParameter("id");
+        }
+        else {
+            // Zähler runterzählen weil falsch 
+            sql = "UPDATE APP.VOKABEL SET COUNTER = COUNTER - 1 WHERE id = " + request.getParameter("id");
+        }
     }
 %>
 
+<!-- Wenn einmal übermittelt: -->
+
 <sql:query var="resultat" dataSource="jdbc/vokabeltrainer">
-    SELECT * FROM APP.VOKABEL ORDER BY RANDOM() FETCH FIRST 1 ROWS ONLY
+    SELECT * FROM APP.VOKABEL ORDER BY counter, RANDOM() FETCH FIRST 1 ROWS ONLY
 </sql:query>
 
 <!DOCTYPE html>
@@ -65,7 +74,7 @@
                                         autofocus
                                     </c:if>    
                                     type="text" name="deutsch" class="form-control" placeholder="Deutsch">
-                                <input type="hidden" name="id" value ="${resultat.getRows()[0].id}">
+                                
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -79,10 +88,13 @@
                                     <c:if test="${zufallsZahl == 1}">
                                         autofocus
                                     </c:if>    
-                                    type="text" name="fremdsprahce" class="form-control" placeholder="Fremdsprache">
+                                    type="text" name="fremdsprache" class="form-control" placeholder="Fremdsprache">
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="id" value ="${resultat.getRows()[0].id}">
+                    <input type="hidden" name="de" value ="${resultat.getRows()[0].deutsch}">
+                    <input type="hidden" name="fr" value ="${resultat.getRows()[0].fremdsprache}">
                     <button type="submit" class="btn btn-primary">Abschicken</button>
                 </form>
             </div>
