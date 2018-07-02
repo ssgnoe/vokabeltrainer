@@ -19,26 +19,8 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="/">Vokabeltrainer</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Übersicht</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="abfragen.jsp">Abfragen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="neu.jsp">Neu</a>
-                </li>
-              </ul> 
-            </div>
-        </nav>
+        <c:set var="page">index</c:set>
+        <%@ include file="nav.jsp" %>
 
           <main role="main" class="container" style="margin-top: 70px">
 

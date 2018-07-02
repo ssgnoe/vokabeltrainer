@@ -27,26 +27,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="/">Vokabeltrainer</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Übersicht</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="abfragen.jsp">Abfragen</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Neu</a>
-                    </li>
-                </ul> 
-            </div>
-        </nav>
+        <c:set var="page">neu</c:set>
+        <%@ include file="nav.jsp" %>
 
         <main role="main" class="container" style="margin-top: 70px">
             
@@ -64,7 +46,7 @@
                             
                             <c:otherwise>
                                 <div class="alert alert-success">
-                                    <p>Das Wort wurde hinzugefügt</p>
+                                    <p>Die Vokabel wurde hinzugefügt</p>
                                     <p>${param.deutsch} => ${param.fremdsprache}</p>                                   
                                 </div>
                             </c:otherwise>
