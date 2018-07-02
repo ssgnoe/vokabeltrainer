@@ -77,13 +77,13 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="deutsch">Deutsch</label>
-                                <input autofocus type="text" name="deutsch" class="form-control" placeholder="Deutsch">
+                                <input required autofocus type="text" name="deutsch" class="form-control" placeholder="Deutsch">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="deutsch">Fremdsprache</label>
-                                <input type="text" name="fremdsprache" class="form-control" placeholder="Fremdsprache">
+                                <input required type="text" name="fremdsprache" class="form-control" placeholder="Fremdsprache">
                             </div>
                         </div>
                     </div>

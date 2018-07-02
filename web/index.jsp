@@ -16,6 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -56,7 +57,11 @@
                             <tr>
                                 <td>${zeile.deutsch}</td>
                                 <td>${zeile.fremdsprache}</td>
-                                <td>${zeile.counter}</td>
+                                <td
+                                    <c:if test="${zeile.counter < 0}">
+                                        class="bg-danger"
+                                    </c:if>                                    
+                                    >${zeile.counter}</td>
                                 <td><a href="delete.jsp?id=${zeile.id}" class="btn btn-danger">X</a></td>
                             </tr>
                         </c:forEach>
@@ -80,7 +85,10 @@
             $(document).ready(function() {
                 $('#overview').DataTable({
                     'paging': false,
-                    "info":     false
+                    "info": false,
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/German.json"
+                    }
                 });
             } );
         </script>

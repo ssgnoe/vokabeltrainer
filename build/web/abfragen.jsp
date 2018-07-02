@@ -93,7 +93,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="deutsch">Deutsch</label>
-                                <input 
+                                <input required
                                     <c:if test="${zufallsZahl == 1}">
                                         value="${resultat.getRows()[randomWord].deutsch}"
                                         readonly
@@ -108,7 +108,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="deutsch">Fremdsprache</label>
-                                <input 
+                                <input required
                                     <c:if test="${zufallsZahl == 0}">
                                         value="${resultat.getRows()[randomWord].fremdsprache}" 
                                         readonly
