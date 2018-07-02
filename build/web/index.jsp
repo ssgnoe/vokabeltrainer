@@ -27,7 +27,13 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="abfragen.jsp">Abfragen</a>
+                    <a class="nav-link" href="#">Übersicht</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="abfragen.jsp">Abfragen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="neu.jsp">Neu</a>
                 </li>
               </ul> 
             </div>
@@ -38,24 +44,45 @@
             <div class="starter-template">
                 <h1>Vokabelübersicht</h1>
                 
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="overview">
                     <thead>
                         <th>Deutsch</th>
                         <th>Fremdsprache</th>
                         <th>Counter</th>
+                        <th>Löschen</th>
                     </thead>
                     <tbody>
                         <c:forEach var="zeile" items="${resultat.rows}">
                             <tr>
-                                <td><c:out value="${zeile.deutsch}"/></td>
-                                <td><c:out value="${zeile.fremdsprache}"/></td>
-                                <td><c:out value="${zeile.counter}"/></td>
+                                <td>${zeile.deutsch}</td>
+                                <td>${zeile.fremdsprache}</td>
+                                <td>${zeile.counter}</td>
+                                <td><a href="delete.jsp?id=${zeile.id}" class="btn btn-danger">X</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+                <div class="alert alert-info">
+                    <p>Counter: Richtig: +1, Falsch: -1</p>
+                    <a class="btn btn-danger" href="kill.jsp">Counter zurücksetzen</a>
+                </div>
             </div>
 
           </main>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#overview').DataTable({
+                    'paging': false,
+                    "info":     false
+                });
+            } );
+        </script>
     </body>
 </html>
